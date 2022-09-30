@@ -31,8 +31,14 @@ def get_vendor(mac_address: object) -> str:
     #  encryption techniques but could not get working in reasonable timescale
     apikey = open("apiKey", "r").read()
     url = f'https://api.macaddress.io/v1?apiKey={apikey}&output=vendor&search={mac_address}'
-    x = requests.get(url)
-    return x.text
+
+    # Try making the request and raise error if issues with connectivity
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        raise SystemExit(err)
+    return response.text
 
 
 # Simple main
