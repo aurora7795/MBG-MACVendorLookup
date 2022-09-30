@@ -45,6 +45,24 @@ Example Output:
 Invalid MAC or OUI address was received.
 ```
 
+The utility contains a simple DockerFile to get the application dockerized. Override CMD at runtime to add MAC Address 
+argument:
+
+```
+docker build -f dockerFile -t mac_address_test . && docker run mac_address_test 44:38:39:ff:ef:57
+```
+
+The API Key for interacting with the https://macaddress.io resides in the apiKey file (unencrypted at the moment, 
+see below). It can be changed if needs be at the moment.
+
+## Future work
+
+Due to time considerations, the ApiKey is unencrypted in a text file - if it is going to remain static,
+it should be encrypted to prevent tampering. 
+
+A hashbang is also present to make it easier to run the utility at the command line more easily - it may be the case 
+that a more elegant solution is available. 
+
 ## Contributors
 
 Thanks to the following people who have contributed to this project:
