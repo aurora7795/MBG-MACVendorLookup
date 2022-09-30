@@ -1,0 +1,9 @@
+# simple DockerFile to get application dockerized. Override CMD at runtime to add MAC Address argument
+FROM python:3.8
+
+ADD vendorFromMac.py .
+ADD apiKey .
+
+RUN pip install requests argparse
+
+ENTRYPOINT [ "python", "./vendorFromMac.py"]
